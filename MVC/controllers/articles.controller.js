@@ -1,4 +1,13 @@
-const { fetchSpecificArticle } = require("../models/articles.model.js");
+const {
+  fetchSpecificArticle,
+  fetchArticlesAndTotalComments,
+} = require("../models/articles.model.js");
+
+const getArticlesAndTotalComments = (request, response) => {
+  return fetchArticlesAndTotalComments().then(({ rows }) => {
+    response.status(200).send({ articlesWithTotalComments: rows });
+  });
+};
 
 const getSpecificArticle = (request, response) => {
   const { article_id } = request.params;
@@ -22,4 +31,4 @@ const getSpecificArticle = (request, response) => {
     });
 };
 
-module.exports = { getSpecificArticle };
+module.exports = { getSpecificArticle, getArticlesAndTotalComments };
