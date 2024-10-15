@@ -267,6 +267,7 @@ describe("GET", () => {
       .get("/api/articles/3/comments")
       .expect(200)
       .then(({ body }) => {
+        expect(body.commentsOfThisArticle.length).toBe(2);
         expect(body).toEqual({
           commentsOfThisArticle: [
             {
