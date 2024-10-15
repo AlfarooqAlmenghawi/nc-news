@@ -8,6 +8,7 @@ const { getAPI } = require("./MVC/controllers/api.controller.js");
 const {
   getSpecificArticle,
   getArticlesAndTotalComments,
+  getAllCommentsOfSpecificArticle,
 } = require("./MVC/controllers/articles.controller.js");
 
 const { SQLErrorHandler, customErrorhandler } = require("./error-handlers.js");
@@ -21,6 +22,14 @@ app.get("/api/topics", getTopics);
 app.get("/api/articles", getArticlesAndTotalComments);
 
 app.get("/api/articles/:article_id", getSpecificArticle);
+
+app.get("/api/articles/:article_id/comments", getAllCommentsOfSpecificArticle);
+
+app.all("*", function (request, response, next) {
+  response.status(500).send({
+    message: "INVALID API",
+  });
+});
 
 app.use(SQLErrorHandler);
 
