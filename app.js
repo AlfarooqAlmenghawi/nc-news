@@ -10,6 +10,7 @@ const {
   getArticlesAndTotalComments,
   getAllCommentsOfSpecificArticle,
   postCommentToSpecificArticle,
+  patchVotesOfSpecificArticle,
 } = require("./MVC/controllers/articles.controller.js");
 
 const {
@@ -32,6 +33,8 @@ app.get("/api/articles/:article_id", getSpecificArticle);
 app.get("/api/articles/:article_id/comments", getAllCommentsOfSpecificArticle);
 
 app.post("/api/articles/:article_id/comments", postCommentToSpecificArticle);
+
+app.patch("/api/articles/:article_id", patchVotesOfSpecificArticle);
 
 app.all("*", function (request, response, next) {
   response.status(500).send({

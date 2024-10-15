@@ -3,6 +3,7 @@ const {
   fetchArticlesAndTotalComments,
   fetchAllCommentsOfSpecificArticle,
   addCommentToSpecificArticle,
+  updateVotesOfSpecificArticle,
 } = require("../models/articles.model.js");
 
 const getArticlesAndTotalComments = (request, response) => {
@@ -46,9 +47,22 @@ const postCommentToSpecificArticle = (request, response, next) => {
     });
 };
 
+const patchVotesOfSpecificArticle = (request, response, next) => {
+  const { article_id } = request.params;
+  const requestedVoteChangeData = request.body;
+
+  return updateVotesOfSpecificArticle(article_id, requestedVoteChangeData).then(
+    ({ rows }) => {
+      console.log(rows);
+      response.status(202).send(rows);
+    }
+  );
+};
+
 module.exports = {
   getSpecificArticle,
   getArticlesAndTotalComments,
   getAllCommentsOfSpecificArticle,
   postCommentToSpecificArticle,
+  patchVotesOfSpecificArticle,
 };

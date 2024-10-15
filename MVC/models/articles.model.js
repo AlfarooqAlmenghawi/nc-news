@@ -49,9 +49,19 @@ const addCommentToSpecificArticle = (article_id, requestedComment) => {
   );
 };
 
+const updateVotesOfSpecificArticle = (article_id, requestedVoteChangeData) => {
+  return db.query(
+    `UPDATE articles 
+    SET votes = votes + $1
+    WHERE article_id = $2 RETURNING *;`,
+    [requestedVoteChangeData.inc_votes, article_id]
+  );
+};
+
 module.exports = {
   fetchSpecificArticle,
   fetchArticlesAndTotalComments,
   fetchAllCommentsOfSpecificArticle,
   addCommentToSpecificArticle,
+  updateVotesOfSpecificArticle,
 };

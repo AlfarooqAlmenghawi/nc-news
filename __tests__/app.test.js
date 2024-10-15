@@ -56,7 +56,7 @@ describe("GET", () => {
       });
   });
 
-  test("/api/articles/ 200: responds with all the articles with the total comment count for each article", () => {
+  test("/api/articles/ 200: responds with all the articles with the total comment count for each article and is sorted by date", () => {
     return request(app)
       .get("/api/articles/")
       .expect(200)
@@ -207,6 +207,10 @@ describe("GET", () => {
               total_comment_count: "0",
             },
           ],
+        });
+
+        expect(body.articlesWithTotalComments).toBeSortedBy("created_at", {
+          descending: true,
         });
       });
   });
