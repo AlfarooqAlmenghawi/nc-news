@@ -36,10 +36,34 @@
           "title": "Living in the shadow of a great man",
           "topic": "mitch",
           "author": "butter_bridge",
-          "body": "I find this existence challenging",
           "created_at": "2020-07-09T20:11:00.000Z",
           "votes": 100,
-          "article_img_url": "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700"
+          "article_img_url": "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
+          "comment_count": "11 - example"
+        }
+      ]
+    }
+  },
+  "GET /api/articles/:article_id/comments": {
+    "description": "serves the requested article's comments and handles errors where necessary",
+    "queries": [],
+    "exampleResponse": {
+      "commentsOfThisArticle": [
+        {
+          "comment_id": 1,
+          "body": "Oh, I've got compassion running out of my nose, pal! I'm the Sultan of Sentiment!",
+          "article_id": 9,
+          "author": "butter_bridge",
+          "votes": 16,
+          "created_at": "2020-04-06T12:17:00.000Z"
+        },
+        {
+          "comment_id": 17,
+          "body": "The owls are not what they seem.",
+          "article_id": 9,
+          "author": "icellusedkars",
+          "votes": 20,
+          "created_at": "2020-03-14T17:02:00.000Z"
         }
       ]
     }
