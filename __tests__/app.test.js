@@ -216,13 +216,10 @@ describe("GET", () => {
       .get("/api/articles/nonsense")
       .expect(406)
       .then(({ body }) => {
-        console.log(body);
-        expect(body.status).toBe(406);
         expect(body.message).toBe(
           "Unknown endpoints are not acceptable on this platform."
         );
         expect(body).toEqual({
-          status: 406,
           message: "Unknown endpoints are not acceptable on this platform.",
         });
       });
@@ -233,13 +230,10 @@ describe("GET", () => {
       .get("/api/articles/274957890")
       .expect(410)
       .then(({ body }) => {
-        console.log(body);
-        expect(body.status).toBe(410);
         expect(body.message).toBe(
           "??? There isn't an article stored in this parameter."
         );
         expect(body).toEqual({
-          status: 410,
           message: "??? There isn't an article stored in this parameter.",
         });
       });

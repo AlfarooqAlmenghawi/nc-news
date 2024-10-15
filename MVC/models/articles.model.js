@@ -8,9 +8,17 @@ const fetchArticlesAndTotalComments = () => {
 };
 
 const fetchSpecificArticle = (article_id) => {
-  return db.query(
-    format(`SELECT * FROM articles WHERE article_id = %L`, [article_id])
-  );
+  return db
+    .query(format(`SELECT * FROM articles WHERE article_id = %L`, [article_id]))
+    .then((result) => {
+      if (result.rows.length === 0) {
+        return Promise.reject({
+          status: 410,
+          message: "??? There isn't an article stored in this parameter.",
+        });
+      }
+      return result;
+    });
 };
 
 module.exports = { fetchSpecificArticle, fetchArticlesAndTotalComments };
