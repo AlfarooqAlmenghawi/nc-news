@@ -67,5 +67,21 @@
         }
       ]
     }
+  },
+  "POST /api/articles/:article_id/comments": {
+    "description": "Adds a comment while making a reference to the article",
+    "queries": [],
+    "exampleResponse": {
+      "addedComment": [
+        {
+          "comment_id": 21,
+          "body": "This earth...",
+          "article_id": 1,
+          "author": "icellusedkars",
+          "votes": 0,
+          "created_at": "2024-10-15T14:55:34.794Z"
+        }
+      ]
+    }
   }
 }

@@ -42,8 +42,16 @@ const fetchAllCommentsOfSpecificArticle = (article_id) => {
   });
 };
 
+const addCommentToSpecificArticle = (article_id, requestedComment) => {
+  return db.query(
+    `INSERT INTO comments (body, article_id, author, votes) VALUES ($1, $2, $3, $4) RETURNING *;`,
+    [requestedComment.comment, article_id, requestedComment.username, 0]
+  );
+};
+
 module.exports = {
   fetchSpecificArticle,
   fetchArticlesAndTotalComments,
   fetchAllCommentsOfSpecificArticle,
+  addCommentToSpecificArticle,
 };

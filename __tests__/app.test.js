@@ -312,3 +312,71 @@ describe("GET", () => {
       });
   });
 });
+
+describe("POST", () => {
+  test("/api/articles/:article_id/comments 201: posts the comment with the reference to the article to the database", () => {
+    const exampleComment = {
+      username: "icellusedkars",
+      comment:
+        "I don't like this article. How dare you post such trash content?",
+    };
+
+    return request(app)
+      .post("/api/articles/5/comments")
+      .send(exampleComment)
+      .expect(201)
+      .then(({ body }) => {
+        expect(body.addedComment[0].article_id).toBe(5);
+        expect(body.addedComment[0].author).toBe("icellusedkars");
+        expect(body.addedComment[0].comment_id).toBe(19);
+        expect(body.addedComment[0].votes).toBe(0);
+        // How i'm handling the constantly changing time data
+        expect(body).toEqual({
+          addedComment: [
+            {
+              comment_id: 19,
+              body: "I don't like this article. How dare you post such trash content?",
+              article_id: 5,
+              author: "icellusedkars",
+              votes: 0,
+              created_at: expect.any(String),
+            },
+          ],
+        });
+      });
+  });
+
+  test("/api/articles/:article_id/comments 406: returns an error if the username is invalid and doesn't exist in the database.", () => {
+    const exampleComment = {
+      username: "rosemullan",
+      comment: "431",
+    };
+
+    return request(app)
+      .post("/api/articles/12/comments")
+      .send(exampleComment)
+      .expect(406)
+      .then(({ body }) => {
+        expect(body).toEqual({
+          message: "User doesn't exist.",
+        });
+      });
+  });
+
+  test("/api/articles/:article_id/comments 400: returns an error if the object format is invalid.", () => {
+    const exampleComment = {
+      userdname: "icellusedkars",
+      comment: "431",
+    };
+
+    return request(app)
+      .post("/api/articles/12/comments")
+      .send(exampleComment)
+      .expect(400)
+      .then(({ body }) => {
+        expect(body).toEqual({
+          message: "Invalid object format.",
+        });
+      });
+  });
+});

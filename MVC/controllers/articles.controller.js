@@ -2,6 +2,7 @@ const {
   fetchSpecificArticle,
   fetchArticlesAndTotalComments,
   fetchAllCommentsOfSpecificArticle,
+  addCommentToSpecificArticle,
 } = require("../models/articles.model.js");
 
 const getArticlesAndTotalComments = (request, response) => {
@@ -33,8 +34,21 @@ const getAllCommentsOfSpecificArticle = (request, response, next) => {
     });
 };
 
+const postCommentToSpecificArticle = (request, response, next) => {
+  const { article_id } = request.params;
+  const requestedComment = request.body;
+  return addCommentToSpecificArticle(article_id, requestedComment)
+    .then((result) => {
+      response.status(201).send({ addedComment: result.rows });
+    })
+    .catch((error) => {
+      next(error);
+    });
+};
+
 module.exports = {
   getSpecificArticle,
   getArticlesAndTotalComments,
   getAllCommentsOfSpecificArticle,
+  postCommentToSpecificArticle,
 };
