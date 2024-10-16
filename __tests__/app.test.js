@@ -368,6 +368,23 @@ describe("POST", () => {
       });
   });
 
+  test("/api/articles/:article_id/comments 406: returns an error if the article id in the parameter is invalid to post in the first place.", () => {
+    const exampleComment = {
+      username: "icellusedkars",
+      comment: "Yo",
+    };
+
+    return request(app)
+      .post("/api/articles/888/comments")
+      .send(exampleComment)
+      .expect(406)
+      .then(({ body }) => {
+        expect(body).toEqual({
+          message: "Invalid article ID, so nowhere to post this comment.",
+        });
+      });
+  });
+
   test("/api/articles/:article_id/comments 400: returns an error if the object format is invalid.", () => {
     const exampleComment = {
       userdname: "icellusedkars",
@@ -381,6 +398,86 @@ describe("POST", () => {
       .then(({ body }) => {
         expect(body).toEqual({
           message: "Invalid object format.",
+        });
+      });
+  });
+});
+
+describe("PATCH", () => {
+  test("/api/articles/:article_id 202: successfully updates the votes count of a specific article", () => {
+    const requestedVoteChange = {
+      inc_votes: 6,
+    };
+
+    return request(app)
+      .patch("/api/articles/4")
+      .send(requestedVoteChange)
+      .expect(202)
+      .then(({ body }) => {
+        expect(body).toEqual({
+          updatedArticle: [
+            {
+              article_id: 4,
+              title: "Student SUES Mitch!",
+              topic: "mitch",
+              author: "rogersop",
+              body: "We all love Mitch and his wonderful, unique typing style. However, the volume of his typing has ALLEGEDLY burst another students eardrums, and they are now suing for damages",
+              created_at: "2020-05-06T01:14:00.000Z",
+              votes: 6,
+              article_img_url:
+                "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
+            },
+          ],
+        });
+      });
+  });
+
+  test("/api/articles/:article_id 410: rejects the request by sending a 410 if there is no article in the first place to update.", () => {
+    const requestedVoteChange = {
+      inc_votes: 6,
+    };
+
+    return request(app)
+      .patch("/api/articles/433")
+      .send(requestedVoteChange)
+      .expect(410)
+      .then(({ body }) => {
+        expect(body).toEqual({
+          message: "??? There isn't an article stored in this parameter.",
+        });
+      });
+  });
+
+  test("/api/articles/:article_id 400: rejects the request by sending a 400 if client sends wrong object format.", () => {
+    const requestedVoteChange = {
+      inc_votgggs: 6,
+    };
+
+    return request(app)
+      .patch("/api/articles/4")
+      .send(requestedVoteChange)
+      .expect(400)
+      .then(({ body }) => {
+        expect(body).toEqual({
+          message: "Invalid object format.",
+        });
+      });
+  });
+});
+
+describe("Last resort error handler", () => {
+  test("(any invalid API) 500: rejects the request if API doesn't exist, and is not supposed to be sent.", () => {
+    const requestedVoteChange = {
+      inc_votes: 6,
+    }; // can be anything
+
+    return request(app)
+      .patch("/api/articccleaf4") // or anything else that doesn't exist or shouldn't
+      .send(requestedVoteChange)
+      .expect(500)
+      .then(({ body }) => {
+        expect(body).toEqual({
+          message: "INVALID API",
         });
       });
   });

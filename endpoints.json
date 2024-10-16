@@ -75,11 +75,29 @@
       "addedComment": [
         {
           "comment_id": 21,
-          "body": "This earth...",
+          "body": "This...",
           "article_id": 1,
           "author": "icellusedkars",
           "votes": 0,
           "created_at": "2024-10-15T14:55:34.794Z"
+        }
+      ]
+    }
+  },
+  "PATCH /api/articles/:article_id": {
+    "description": "Updates and article's votes",
+    "queries": [],
+    "exampleResponse": {
+      "updatedArticle": [
+        {
+          "article_id": 4,
+          "title": "Student SUES Mitch!",
+          "topic": "mitch",
+          "author": "rogersop",
+          "body": "We all love Mitch and his wonderful, unique typing style. However, the volume of his typing has ALLEGEDLY burst another students eardrums, and they are now suing for damages",
+          "created_at": "2020-05-06T01:14:00.000Z",
+          "votes": 6,
+          "article_img_url": "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700"
         }
       ]
     }

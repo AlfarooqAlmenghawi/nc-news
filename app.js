@@ -36,12 +36,6 @@ app.post("/api/articles/:article_id/comments", postCommentToSpecificArticle);
 
 app.patch("/api/articles/:article_id", patchVotesOfSpecificArticle);
 
-app.all("*", function (request, response, next) {
-  response.status(500).send({
-    message: "INVALID API",
-  });
-});
-
 app.use(SQLErrorHandlerForUnknownEndPoints);
 
 app.use(SQLErrorHandlerForPostingInvalidUsernamesOrPostingToInvalidArticles);
@@ -49,5 +43,11 @@ app.use(SQLErrorHandlerForPostingInvalidUsernamesOrPostingToInvalidArticles);
 app.use(SQLErrorHandlerForNullValuesOrInvalidBodyFormatRequestedByTheClient);
 
 app.use(customErrorhandler);
+
+app.all("*", function (request, response, next) {
+  response.status(500).send({
+    message: "INVALID API",
+  });
+});
 
 module.exports = app;
