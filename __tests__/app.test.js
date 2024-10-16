@@ -215,6 +215,42 @@ describe("GET", () => {
       });
   });
 
+  test("/api/users/ 200: responds with all the users in the users table (using SQL of course).", () => {
+    request(app)
+      .get("/api/users")
+      .expect(200)
+      .then(({ body }) => {
+        expect(body).toEqual({
+          Users: [
+            {
+              username: "butter_bridge",
+              name: "jonny",
+              avatar_url:
+                "https://www.healthytherapies.com/wp-content/uploads/2016/06/Lime3.jpg",
+            },
+            {
+              username: "icellusedkars",
+              name: "sam",
+              avatar_url:
+                "https://avatars2.githubusercontent.com/u/24604688?s=460&v=4",
+            },
+            {
+              username: "rogersop",
+              name: "paul",
+              avatar_url:
+                "https://avatars2.githubusercontent.com/u/24394918?s=400&v=4",
+            },
+            {
+              username: "lurker",
+              name: "do_nothing",
+              avatar_url:
+                "https://www.golenbock.com/wp-content/uploads/2015/01/placeholder-user.png",
+            },
+          ],
+        });
+      });
+  }); // error handling for get users and articles already done with the LAST RESORT ERROR HANDLER describe block (the last describe block.).
+
   test("/api/articles/:article_id 200: responds with the specific article for the user when they send a valid endpoint.", () => {
     return request(app)
       .get("/api/articles/3")
@@ -560,7 +596,7 @@ describe("DELETE", () => {
   });
 });
 
-describe("Last resort error handler", () => {
+describe("LAST RESORT ERROR HANDLER", () => {
   test("(any invalid API) 500: rejects the request if API doesn't exist, and is not supposed to be sent.", () => {
     const requestedVoteChange = {
       inc_votes: 6,
@@ -569,7 +605,7 @@ describe("Last resort error handler", () => {
     return request(app)
       .patch("/api/articccleaf4") // or anything else that doesn't exist or shouldn't
       .send(requestedVoteChange)
-      .expect(500)
+      .expect(404)
       .then(({ body }) => {
         expect(body).toEqual({
           message: "INVALID API",
