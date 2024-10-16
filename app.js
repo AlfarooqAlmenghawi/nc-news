@@ -10,6 +10,7 @@ const {
   getArticlesAndTotalComments,
   getAllCommentsOfSpecificArticle,
   postCommentToSpecificArticle,
+  patchVotesOfSpecificArticle,
 } = require("./MVC/controllers/articles.controller.js");
 
 const {
@@ -33,11 +34,7 @@ app.get("/api/articles/:article_id/comments", getAllCommentsOfSpecificArticle);
 
 app.post("/api/articles/:article_id/comments", postCommentToSpecificArticle);
 
-app.all("*", function (request, response, next) {
-  response.status(500).send({
-    message: "INVALID API",
-  });
-});
+app.patch("/api/articles/:article_id", patchVotesOfSpecificArticle);
 
 app.use(SQLErrorHandlerForUnknownEndPoints);
 
@@ -46,5 +43,11 @@ app.use(SQLErrorHandlerForPostingInvalidUsernamesOrPostingToInvalidArticles);
 app.use(SQLErrorHandlerForNullValuesOrInvalidBodyFormatRequestedByTheClient);
 
 app.use(customErrorhandler);
+
+app.all("*", function (request, response, next) {
+  response.status(500).send({
+    message: "INVALID API",
+  });
+});
 
 module.exports = app;
