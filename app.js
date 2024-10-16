@@ -1,11 +1,11 @@
 const express = require("express");
 const app = express();
 
+// Functions from MVC Requiring
+
 const { getTopics } = require("./MVC/controllers/topics.controller.js");
 
 const { getAPI } = require("./MVC/controllers/api.controller.js");
-
-// Functions from MVC Requiring
 
 const {
   getSpecificArticle,
@@ -21,6 +21,8 @@ const {
   deleteSpecificComment,
 } = require("./MVC/controllers/comments.controller.js");
 
+const { getUsers } = require("./MVC/controllers/users.controller.js");
+
 // Error Handling Requiring
 
 const { SQLErrorHandler, customErrorhandler } = require("./error-handlers.js");
@@ -30,6 +32,8 @@ const { SQLErrorHandler, customErrorhandler } = require("./error-handlers.js");
 app.use(express.json());
 
 app.get("/api", getAPI);
+
+app.get("/api/users", getUsers);
 
 app.get("/api/topics", getTopics);
 
@@ -60,7 +64,7 @@ app.use(SQLErrorHandler);
 app.use(customErrorhandler);
 
 app.all("*", function (request, response, next) {
-  response.status(500).send({
+  response.status(404).send({
     message: "INVALID API",
   });
 });
