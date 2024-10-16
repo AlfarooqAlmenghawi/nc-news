@@ -7,7 +7,10 @@ const {
 } = require("../models/articles.model.js");
 
 const getArticlesAndTotalComments = (request, response) => {
-  return fetchArticlesAndTotalComments().then(({ rows }) => {
+  const queries = request.query;
+  console.log(queries);
+
+  return fetchArticlesAndTotalComments(queries).then(({ rows }) => {
     response.status(200).send({ articlesWithTotalComments: rows });
   });
 };
