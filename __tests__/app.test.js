@@ -401,6 +401,73 @@ describe("POST", () => {
         });
       });
   });
+
+  test("/api/articles/:article_id/comments 400: returns an error if the ID is an invalid format.", () => {
+    const exampleComment = {
+      username: "icellusedkars",
+      comment: "431",
+    };
+
+    return request(app)
+      .post("/api/articles/notanID/comments")
+      .send(exampleComment)
+      .expect(406)
+      .then(({ body }) => {
+        expect(body).toEqual({
+          message: "Unknown endpoints are not acceptable on this platform.",
+        });
+      });
+  });
+
+  test("/api/articles/:article_id/comments 400: returns an error if the ID non existent.", () => {
+    const exampleComment = {
+      username: "icellusedkars",
+      comment: "431",
+    };
+
+    return request(app)
+      .post("/api/articles/1996/comments")
+      .send(exampleComment)
+      .expect(406)
+      .then(({ body }) => {
+        expect(body).toEqual({
+          message: "Invalid article ID, so nowhere to post this comment.",
+        });
+      });
+  });
+
+  test("/api/articles/:article_id/comments 400: returns an error if the ID non existent.", () => {
+    const exampleComment = {
+      username: "icellusedkars",
+      comment: "431",
+    };
+
+    return request(app)
+      .post("/api/articles/1996/comments")
+      .send(exampleComment)
+      .expect(406)
+      .then(({ body }) => {
+        expect(body).toEqual({
+          message: "Invalid article ID, so nowhere to post this comment.",
+        });
+      });
+  });
+
+  test("/api/articles/:article_id/comments 400: returns an error if the body is missing required elements.", () => {
+    const exampleComment = {
+      username: "icellusedkars",
+    };
+
+    return request(app)
+      .post("/api/articles/1996/comments")
+      .send(exampleComment)
+      .expect(400)
+      .then(({ body }) => {
+        expect(body).toEqual({
+          message: "Invalid object format.",
+        });
+      });
+  });
 });
 
 describe("PATCH", () => {
@@ -460,6 +527,34 @@ describe("PATCH", () => {
       .then(({ body }) => {
         expect(body).toEqual({
           message: "Invalid object format.",
+        });
+      });
+  });
+});
+
+describe("DELETE", () => {
+  test("/api/comments/:comment_id 204: should delete and return a 204 (No content) indicating that it has successfully deleted the comment.", () => {
+    return request(app).delete("/api/comments/6").expect(204);
+  });
+
+  test("/api/comments/:comment_id 410: should reject and return a 410 (Gone) indicating that the comment doesn't even exist, either because it has already been deleted or the comment never existed in the parameter in the first place.", () => {
+    return request(app)
+      .delete("/api/comments/6768")
+      .expect(410)
+      .then(({ body }) => {
+        expect(body).toEqual({
+          message: "??? There isn't a comment stored in this parameter.",
+        });
+      });
+  });
+
+  test("/api/comments/:comment_id 410: should reject and return a 406 indicating that the parameter is not a nuber (ID).", () => {
+    return request(app)
+      .delete("/api/comments/HAVGVDG")
+      .expect(406)
+      .then(({ body }) => {
+        expect(body).toEqual({
+          message: "Unknown endpoints are not acceptable on this platform.",
         });
       });
   });
