@@ -8,9 +8,8 @@ const nonExistentArticleCustomError = {
 };
 
 const fetchArticlesAndTotalComments = (queries) => {
-  let queryString = `SELECT articles.article_id, articles.title, articles.topic, articles.author, articles.created_at, articles.votes, articles.article_img_url, COUNT(comments.comment_id) AS total_comment_count FROM articles 
-  LEFT JOIN comments ON comments.article_id = articles.article_id
-  GROUP BY articles.article_id`;
+  let queryString = `SELECT articles.article_id, articles.title, articles.topic, articles.author, articles.created_at, articles.votes, articles.article_img_url, COUNT(comments.comment_id) AS comment_count FROM articles 
+  LEFT JOIN comments ON comments.article_id = articles.article_id`;
 
   // let validQueries = [
   //   "article_id",
@@ -20,12 +19,19 @@ const fetchArticlesAndTotalComments = (queries) => {
   //   "created_at",
   //   "votes",
   //   "article_img_url",
-  //   "total_comment_count",
+  //   "comment_count",
   // ];
 
   let validOrderBys = ["asc", "desc"];
 
   let queryValues = []; // queryValues array is useless by the way. it's just a fun reference
+
+  if (queries.topic) {
+    queryString = queryString + ` WHERE topic = '${queries.topic}'`;
+    queryValues.push(queries.topic);
+  }
+
+  queryString += ` GROUP BY articles.article_id`;
 
   // ORDER BY articles.created_at DESC
   if (queries.sort_by) {
@@ -35,7 +41,6 @@ const fetchArticlesAndTotalComments = (queries) => {
     queryString = queryString + ` ORDER BY created_at`;
     queryValues.push("created_at");
   } // if the column is wrong it throws an error by itself unlike the one below , but i dont need to put an error anyway just leave it default as desc, the "&& validOrderBys.includes(queries.order)" fixes the error that doesn't crash the server, remove it and test and see if you desire
-
   if (queries.order && validOrderBys.includes(queries.order)) {
     queryString = queryString + ` ${queries.order}`;
     queryValues.push(queries.order);
@@ -43,12 +48,23 @@ const fetchArticlesAndTotalComments = (queries) => {
     queryString = queryString + ` DESC`;
     queryValues.push("desc");
   }
-  return db.query(queryString);
+  return db.query(queryString).then((result) => {
+    if (result.rows.length === 0) {
+      return Promise.reject({ status: 410, message: "There are no articles." });
+    }
+    return result;
+  });
 };
 
 const fetchSpecificArticle = (article_id) => {
   return db
-    .query(format(`SELECT * FROM articles WHERE article_id = %L`, [article_id]))
+    .query(
+      format(
+        `SELECT articles.article_id, articles.title, articles.topic, articles.author, articles.body, articles.created_at, articles.votes, articles.article_img_url, COUNT(comments.comment_id) AS comment_count FROM articles 
+  LEFT JOIN comments ON comments.article_id = articles.article_id WHERE articles.article_id = %L GROUP BY articles.article_id`,
+        [article_id]
+      )
+    )
     .then((result) => {
       if (result.rows.length === 0) {
         return Promise.reject(nonExistentArticleCustomError);
