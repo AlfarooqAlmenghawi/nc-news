@@ -10,7 +10,7 @@
     "prepare": "husky install",
     "nodemon": "NODE_ENV=test nodemon appfornodemon.js",
     "start": "node listen.js",
-    "seed-prod": "NODE_ENV=production npm run seed"
+    "seed-production-database": "NODE_ENV=production npm run seed"
   },
   "repository": {
     "type": "git",
