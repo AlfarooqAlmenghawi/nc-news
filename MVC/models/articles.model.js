@@ -1,15 +1,49 @@
 const db = require("../../db/connection.js");
 const format = require("pg-format");
+const { sort } = require("../../db/data/test-data/articles.js");
 
 const nonExistentArticleCustomError = {
   status: 410,
   message: "??? There isn't an article stored in this parameter.",
 };
 
-const fetchArticlesAndTotalComments = () => {
-  return db.query(`SELECT articles.article_id, articles.title, articles.topic, articles.author, articles.created_at, articles.votes, articles.article_img_url, COUNT(comments.comment_id) AS total_comment_count FROM articles 
- LEFT JOIN comments ON comments.article_id = articles.article_id
- GROUP BY articles.article_id ORDER BY articles.created_at DESC;`);
+const fetchArticlesAndTotalComments = (queries) => {
+  let queryString = `SELECT articles.article_id, articles.title, articles.topic, articles.author, articles.created_at, articles.votes, articles.article_img_url, COUNT(comments.comment_id) AS total_comment_count FROM articles 
+  LEFT JOIN comments ON comments.article_id = articles.article_id
+  GROUP BY articles.article_id`;
+
+  // let validQueries = [
+  //   "article_id",
+  //   "title",
+  //   "topic",
+  //   "author",
+  //   "created_at",
+  //   "votes",
+  //   "article_img_url",
+  //   "total_comment_count",
+  // ];
+
+  let validOrderBys = ["asc", "desc"];
+
+  let queryValues = []; // queryValues array is useless by the way. it's just a fun reference
+
+  // ORDER BY articles.created_at DESC
+  if (queries.sort_by) {
+    queryString = queryString + ` ORDER BY ${queries.sort_by}`;
+    queryValues.push(queries.sort_by);
+  } else {
+    queryString = queryString + ` ORDER BY created_at`;
+    queryValues.push("created_at");
+  } // if the column is wrong it throws an error by itself unlike the one below , but i dont need to put an error anyway just leave it default as desc, the "&& validOrderBys.includes(queries.order)" fixes the error that doesn't crash the server, remove it and test and see if you desire
+
+  if (queries.order && validOrderBys.includes(queries.order)) {
+    queryString = queryString + ` ${queries.order}`;
+    queryValues.push(queries.order);
+  } else {
+    queryString = queryString + ` DESC`;
+    queryValues.push("desc");
+  }
+  return db.query(queryString);
 };
 
 const fetchSpecificArticle = (article_id) => {
