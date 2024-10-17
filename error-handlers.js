@@ -1,4 +1,8 @@
 const SQLErrorHandler = (error, request, response, next) => {
+  // For undefined columns, usually from queries where there is a typo in the column.
+  if (error.code === "42703") {
+    response.status(400).send({ message: "Column doesn't exist." });
+  }
   // For unknown endpoints
   if (error.code === "22P02") {
     response.status(406).send({

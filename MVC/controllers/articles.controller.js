@@ -6,13 +6,16 @@ const {
   updateVotesOfSpecificArticle,
 } = require("../models/articles.model.js");
 
-const getArticlesAndTotalComments = (request, response) => {
+const getArticlesAndTotalComments = (request, response, next) => {
   const queries = request.query;
-  console.log(queries);
 
-  return fetchArticlesAndTotalComments(queries).then(({ rows }) => {
-    response.status(200).send({ articlesWithTotalComments: rows });
-  });
+  return fetchArticlesAndTotalComments(queries)
+    .then(({ rows }) => {
+      response.status(200).send({ articlesWithTotalComments: rows });
+    })
+    .catch((error) => {
+      next(error);
+    });
 };
 
 const getSpecificArticle = (request, response, next) => {

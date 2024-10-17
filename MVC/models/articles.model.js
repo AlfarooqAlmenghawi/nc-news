@@ -8,21 +8,22 @@ const nonExistentArticleCustomError = {
 };
 
 const fetchArticlesAndTotalComments = (queries) => {
-  console.log(queries);
   let queryString = `SELECT articles.article_id, articles.title, articles.topic, articles.author, articles.created_at, articles.votes, articles.article_img_url, COUNT(comments.comment_id) AS total_comment_count FROM articles 
   LEFT JOIN comments ON comments.article_id = articles.article_id
   GROUP BY articles.article_id`;
 
-  let validQueries = [
-    "article_id",
-    "title",
-    "topic",
-    "author",
-    "created_at",
-    "votes",
-    "article_img_url",
-    "total_comment_count",
-  ];
+  // let validQueries = [
+  //   "article_id",
+  //   "title",
+  //   "topic",
+  //   "author",
+  //   "created_at",
+  //   "votes",
+  //   "article_img_url",
+  //   "total_comment_count",
+  // ];
+
+  let validOrderBys = ["asc", "desc"];
 
   let queryValues = []; // queryValues array is useless by the way. it's just a fun reference
 
@@ -33,18 +34,15 @@ const fetchArticlesAndTotalComments = (queries) => {
   } else {
     queryString = queryString + ` ORDER BY created_at`;
     queryValues.push("created_at");
-  }
+  } // if the column is wrong it throws an error by itself unlike the one below , but i dont need to put an error anyway just leave it default as desc, the "&& validOrderBys.includes(queries.order)" fixes the error that doesn't crash the server, remove it and test and see if you desire
 
-  if (queries.order) {
+  if (queries.order && validOrderBys.includes(queries.order)) {
     queryString = queryString + ` ${queries.order}`;
     queryValues.push(queries.order);
   } else {
     queryString = queryString + ` DESC`;
     queryValues.push("desc");
   }
-
-  console.log(queryString);
-  console.log(queryValues);
   return db.query(queryString);
 };
 
