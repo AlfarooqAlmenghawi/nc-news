@@ -50,6 +50,7 @@ describe("GET", () => {
               votes: 0,
               article_img_url:
                 "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
+              comment_count: "0",
             },
           ],
         });
@@ -72,7 +73,7 @@ describe("GET", () => {
               votes: 0,
               article_img_url:
                 "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
-              total_comment_count: "2",
+              comment_count: "2",
             },
             {
               article_id: 6,
@@ -83,7 +84,7 @@ describe("GET", () => {
               votes: 0,
               article_img_url:
                 "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
-              total_comment_count: "1",
+              comment_count: "1",
             },
             {
               article_id: 2,
@@ -94,7 +95,7 @@ describe("GET", () => {
               votes: 0,
               article_img_url:
                 "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
-              total_comment_count: "0",
+              comment_count: "0",
             },
             {
               article_id: 12,
@@ -105,7 +106,7 @@ describe("GET", () => {
               votes: 0,
               article_img_url:
                 "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
-              total_comment_count: "0",
+              comment_count: "0",
             },
             {
               article_id: 13,
@@ -116,7 +117,7 @@ describe("GET", () => {
               votes: 0,
               article_img_url:
                 "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
-              total_comment_count: "0",
+              comment_count: "0",
             },
             {
               article_id: 5,
@@ -127,7 +128,7 @@ describe("GET", () => {
               votes: 0,
               article_img_url:
                 "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
-              total_comment_count: "2",
+              comment_count: "2",
             },
             {
               article_id: 1,
@@ -138,7 +139,7 @@ describe("GET", () => {
               votes: 100,
               article_img_url:
                 "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
-              total_comment_count: "11",
+              comment_count: "11",
             },
             {
               article_id: 9,
@@ -149,7 +150,7 @@ describe("GET", () => {
               votes: 0,
               article_img_url:
                 "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
-              total_comment_count: "2",
+              comment_count: "2",
             },
             {
               article_id: 10,
@@ -160,7 +161,7 @@ describe("GET", () => {
               votes: 0,
               article_img_url:
                 "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
-              total_comment_count: "0",
+              comment_count: "0",
             },
             {
               article_id: 4,
@@ -171,7 +172,7 @@ describe("GET", () => {
               votes: 0,
               article_img_url:
                 "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
-              total_comment_count: "0",
+              comment_count: "0",
             },
             {
               article_id: 8,
@@ -182,7 +183,7 @@ describe("GET", () => {
               votes: 0,
               article_img_url:
                 "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
-              total_comment_count: "0",
+              comment_count: "0",
             },
             {
               article_id: 11,
@@ -193,7 +194,7 @@ describe("GET", () => {
               votes: 0,
               article_img_url:
                 "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
-              total_comment_count: "0",
+              comment_count: "0",
             },
             {
               article_id: 7,
@@ -204,7 +205,7 @@ describe("GET", () => {
               votes: 0,
               article_img_url:
                 "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
-              total_comment_count: "0",
+              comment_count: "0",
             },
           ],
         });
@@ -268,6 +269,7 @@ describe("GET", () => {
               votes: 0,
               article_img_url:
                 "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
+              comment_count: "2",
             },
           ],
         });
@@ -631,7 +633,7 @@ describe("GET (QUERIES)", () => {
               votes: 0,
               article_img_url:
                 "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
-              total_comment_count: "0",
+              comment_count: "0",
             },
             {
               article_id: 12,
@@ -642,7 +644,7 @@ describe("GET (QUERIES)", () => {
               votes: 0,
               article_img_url:
                 "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
-              total_comment_count: "0",
+              comment_count: "0",
             },
             {
               article_id: 11,
@@ -653,7 +655,7 @@ describe("GET (QUERIES)", () => {
               votes: 0,
               article_img_url:
                 "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
-              total_comment_count: "0",
+              comment_count: "0",
             },
             {
               article_id: 10,
@@ -664,7 +666,7 @@ describe("GET (QUERIES)", () => {
               votes: 0,
               article_img_url:
                 "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
-              total_comment_count: "0",
+              comment_count: "0",
             },
             {
               article_id: 9,
@@ -675,7 +677,7 @@ describe("GET (QUERIES)", () => {
               votes: 0,
               article_img_url:
                 "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
-              total_comment_count: "2",
+              comment_count: "2",
             },
             {
               article_id: 8,
@@ -686,7 +688,7 @@ describe("GET (QUERIES)", () => {
               votes: 0,
               article_img_url:
                 "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
-              total_comment_count: "0",
+              comment_count: "0",
             },
             {
               article_id: 7,
@@ -697,7 +699,7 @@ describe("GET (QUERIES)", () => {
               votes: 0,
               article_img_url:
                 "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
-              total_comment_count: "0",
+              comment_count: "0",
             },
             {
               article_id: 6,
@@ -708,7 +710,7 @@ describe("GET (QUERIES)", () => {
               votes: 0,
               article_img_url:
                 "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
-              total_comment_count: "1",
+              comment_count: "1",
             },
             {
               article_id: 5,
@@ -719,7 +721,7 @@ describe("GET (QUERIES)", () => {
               votes: 0,
               article_img_url:
                 "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
-              total_comment_count: "2",
+              comment_count: "2",
             },
             {
               article_id: 4,
@@ -730,7 +732,7 @@ describe("GET (QUERIES)", () => {
               votes: 0,
               article_img_url:
                 "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
-              total_comment_count: "0",
+              comment_count: "0",
             },
             {
               article_id: 3,
@@ -741,7 +743,7 @@ describe("GET (QUERIES)", () => {
               votes: 0,
               article_img_url:
                 "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
-              total_comment_count: "2",
+              comment_count: "2",
             },
             {
               article_id: 2,
@@ -752,7 +754,7 @@ describe("GET (QUERIES)", () => {
               votes: 0,
               article_img_url:
                 "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
-              total_comment_count: "0",
+              comment_count: "0",
             },
             {
               article_id: 1,
@@ -763,7 +765,7 @@ describe("GET (QUERIES)", () => {
               votes: 100,
               article_img_url:
                 "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
-              total_comment_count: "11",
+              comment_count: "11",
             },
           ],
         });
@@ -790,7 +792,7 @@ describe("GET (QUERIES)", () => {
               votes: 0,
               article_img_url:
                 "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
-              total_comment_count: "0",
+              comment_count: "0",
             },
             {
               article_id: 4,
@@ -801,7 +803,7 @@ describe("GET (QUERIES)", () => {
               votes: 0,
               article_img_url:
                 "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
-              total_comment_count: "0",
+              comment_count: "0",
             },
             {
               article_id: 10,
@@ -812,7 +814,7 @@ describe("GET (QUERIES)", () => {
               votes: 0,
               article_img_url:
                 "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
-              total_comment_count: "0",
+              comment_count: "0",
             },
             {
               article_id: 6,
@@ -823,7 +825,7 @@ describe("GET (QUERIES)", () => {
               votes: 0,
               article_img_url:
                 "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
-              total_comment_count: "1",
+              comment_count: "1",
             },
             {
               article_id: 13,
@@ -834,7 +836,7 @@ describe("GET (QUERIES)", () => {
               votes: 0,
               article_img_url:
                 "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
-              total_comment_count: "0",
+              comment_count: "0",
             },
             {
               article_id: 2,
@@ -845,7 +847,7 @@ describe("GET (QUERIES)", () => {
               votes: 0,
               article_img_url:
                 "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
-              total_comment_count: "0",
+              comment_count: "0",
             },
             {
               article_id: 7,
@@ -856,7 +858,7 @@ describe("GET (QUERIES)", () => {
               votes: 0,
               article_img_url:
                 "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
-              total_comment_count: "0",
+              comment_count: "0",
             },
             {
               article_id: 5,
@@ -867,7 +869,7 @@ describe("GET (QUERIES)", () => {
               votes: 0,
               article_img_url:
                 "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
-              total_comment_count: "2",
+              comment_count: "2",
             },
             {
               article_id: 8,
@@ -878,7 +880,7 @@ describe("GET (QUERIES)", () => {
               votes: 0,
               article_img_url:
                 "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
-              total_comment_count: "0",
+              comment_count: "0",
             },
             {
               article_id: 11,
@@ -889,7 +891,7 @@ describe("GET (QUERIES)", () => {
               votes: 0,
               article_img_url:
                 "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
-              total_comment_count: "0",
+              comment_count: "0",
             },
             {
               article_id: 9,
@@ -900,7 +902,7 @@ describe("GET (QUERIES)", () => {
               votes: 0,
               article_img_url:
                 "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
-              total_comment_count: "2",
+              comment_count: "2",
             },
             {
               article_id: 3,
@@ -911,7 +913,7 @@ describe("GET (QUERIES)", () => {
               votes: 0,
               article_img_url:
                 "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
-              total_comment_count: "2",
+              comment_count: "2",
             },
             {
               article_id: 1,
@@ -922,7 +924,7 @@ describe("GET (QUERIES)", () => {
               votes: 100,
               article_img_url:
                 "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
-              total_comment_count: "11",
+              comment_count: "11",
             },
           ],
         });

@@ -8,7 +8,7 @@ const nonExistentArticleCustomError = {
 };
 
 const fetchArticlesAndTotalComments = (queries) => {
-  let queryString = `SELECT articles.article_id, articles.title, articles.topic, articles.author, articles.created_at, articles.votes, articles.article_img_url, COUNT(comments.comment_id) AS total_comment_count FROM articles 
+  let queryString = `SELECT articles.article_id, articles.title, articles.topic, articles.author, articles.created_at, articles.votes, articles.article_img_url, COUNT(comments.comment_id) AS comment_count FROM articles 
   LEFT JOIN comments ON comments.article_id = articles.article_id`;
 
   // let validQueries = [
@@ -19,7 +19,7 @@ const fetchArticlesAndTotalComments = (queries) => {
   //   "created_at",
   //   "votes",
   //   "article_img_url",
-  //   "total_comment_count",
+  //   "comment_count",
   // ];
 
   let validOrderBys = ["asc", "desc"];
@@ -58,7 +58,13 @@ const fetchArticlesAndTotalComments = (queries) => {
 
 const fetchSpecificArticle = (article_id) => {
   return db
-    .query(format(`SELECT * FROM articles WHERE article_id = %L`, [article_id]))
+    .query(
+      format(
+        `SELECT articles.article_id, articles.title, articles.topic, articles.author, articles.body, articles.created_at, articles.votes, articles.article_img_url, COUNT(comments.comment_id) AS comment_count FROM articles 
+  LEFT JOIN comments ON comments.article_id = articles.article_id WHERE articles.article_id = %L GROUP BY articles.article_id`,
+        [article_id]
+      )
+    )
     .then((result) => {
       if (result.rows.length === 0) {
         return Promise.reject(nonExistentArticleCustomError);
