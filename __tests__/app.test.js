@@ -933,7 +933,7 @@ describe("GET (QUERIES)", () => {
       });
   });
 
-  test("/api/articles?sort_by=favoriteFood&order=asc 200: responds with an error stating that the sort_by query is referencing a column that doesn't exist in the database table", () => {
+  test("/api/articles?sort_by=favoriteFood&order=asc 400: responds with an error stating that the sort_by query is referencing a column that doesn't exist in the database table", () => {
     return request(app)
       .get("/api/articles?sort_by=favoriteFood&order=asc")
       .expect(400)
@@ -951,6 +951,39 @@ describe("GET (QUERIES)", () => {
       .then(({ body }) => {
         expect(body.articlesWithTotalComments).toBeSortedBy("article_id", {
           descending: true,
+        });
+      });
+  });
+
+  test('/api/articles?sort_by=article_id&order=asc&topic=mitch 200: responds with all the articles with the same queries as above but with a specific topic (for example: "mitch")', () => {
+    return request(app)
+      .get("/api/articles?sort_by=article_id&order=asc&topic=mitch")
+      .expect(200)
+      .then(({ body }) => {
+        expect(body.articlesWithTotalComments).toBeSortedBy("article_id", {
+          descending: false,
+        });
+      });
+  });
+
+  test("/api/articles?sort_by=article_id&order=asc&topic=alfarooq 410: responds with an error if there are no articles with the topic of the given query.", () => {
+    return request(app)
+      .get("/api/articles?sort_by=article_id&order=asc&topic=alfarooq")
+      .expect(410)
+      .then(({ body }) => {
+        expect(body).toEqual({
+          message: "There are no articles.",
+        });
+      });
+  });
+
+  test("/api/articles?sort_by=article_id&order=asc&todpic=mitch 200: ignores the third query if it's invalid", () => {
+    return request(app)
+      .get("/api/articles?sort_by=article_id&order=asc&todpic=mitch")
+      .expect(200)
+      .then(({ body }) => {
+        expect(body.articlesWithTotalComments).toBeSortedBy("article_id", {
+          descending: false,
         });
       });
   });
