@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
 
 // Functions from MVC Requiring
 
@@ -28,6 +29,8 @@ const { getUsers } = require("./MVC/controllers/users.controller.js");
 const { SQLErrorHandler, customErrorhandler } = require("./error-handlers.js");
 
 // API Requests Handling
+
+app.use(cors());
 
 app.use(express.json());
 
