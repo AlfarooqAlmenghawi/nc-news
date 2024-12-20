@@ -48,6 +48,7 @@ const fetchArticlesAndTotalComments = (queries) => {
     queryString = queryString + ` DESC`;
     queryValues.push("desc");
   }
+  console.log(queries);
   return db.query(queryString).then((result) => {
     if (result.rows.length === 0) {
       return Promise.reject({ status: 410, message: "There are no articles." });

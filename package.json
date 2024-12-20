@@ -8,7 +8,7 @@
     "seed": "node ./db/seeds/run-seed.js",
     "test": "jest",
     "prepare": "husky install",
-    "nodemon": "NODE_ENV=test nodemon appfornodemon.js",
+    "nodemon": "NODE_ENV=production nodemon appfornodemon.js",
     "start": "node listen.js",
     "seed-production-database": "NODE_ENV=production npm run seed"
   },
