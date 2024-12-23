@@ -41,6 +41,8 @@ const getAllCommentsOfSpecificArticle = (request, response, next) => {
     });
 };
 
+const postArticle = (request, response, next) => {};
+
 const postCommentToSpecificArticle = (request, response, next) => {
   const { article_id } = request.params;
   const requestedComment = request.body;
@@ -70,6 +72,7 @@ module.exports = {
   getSpecificArticle,
   getArticlesAndTotalComments,
   getAllCommentsOfSpecificArticle,
+  postArticle,
   postCommentToSpecificArticle,
   patchVotesOfSpecificArticle,
 };

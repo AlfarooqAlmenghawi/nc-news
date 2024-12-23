@@ -1,9 +1,14 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
 
 // Functions from MVC Requiring
 
-const { getTopics } = require("./MVC/controllers/topics.controller.js");
+const {
+  getTopics,
+  postTopic,
+  deleteSpecificTopic,
+} = require("./MVC/controllers/topics.controller.js");
 
 const { getAPI } = require("./MVC/controllers/api.controller.js");
 
@@ -29,6 +34,8 @@ const { SQLErrorHandler, customErrorhandler } = require("./error-handlers.js");
 
 // API Requests Handling
 
+app.use(cors());
+
 app.use(express.json());
 
 app.get("/api", getAPI);
@@ -51,9 +58,13 @@ app.get("/api/comments/:comment_id", getSpecificComment);
 
 // END OF EXTRA ABOVE
 
+app.post("/api/topics", postTopic);
+
 app.post("/api/articles/:article_id/comments", postCommentToSpecificArticle);
 
 app.patch("/api/articles/:article_id", patchVotesOfSpecificArticle);
+
+app.delete("/api/topics/:topic_name", deleteSpecificTopic);
 
 app.delete("/api/comments/:comment_id", deleteSpecificComment);
 

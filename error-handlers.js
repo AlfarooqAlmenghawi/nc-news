@@ -34,6 +34,10 @@ const SQLErrorHandler = (error, request, response, next) => {
     response.status(400).send({
       message: "Invalid object format.",
     });
+  } else if (error.code === "23505") {
+    response.status(400).send({
+      message: "Violation of unique key constraint",
+    });
   }
   next(error);
 };
