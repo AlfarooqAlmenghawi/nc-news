@@ -1,6 +1,5 @@
 const db = require("../../db/connection.js");
 const format = require("pg-format");
-const { sort } = require("../../db/data/test-data/articles.js");
 
 const nonExistentArticleCustomError = {
   status: 410,
@@ -95,6 +94,20 @@ const fetchAllCommentsOfSpecificArticle = (article_id) => {
   });
 };
 
+const addArticle = (requestedArticle) => {
+  return db.query(
+    "INSERT INTO articles (title, topic, author, body, votes, article_img_url) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;",
+    [
+      requestedArticle.title,
+      requestedArticle.topic,
+      requestedArticle.author,
+      requestedArticle.body,
+      0,
+      requestedArticle.article_img_url,
+    ]
+  );
+};
+
 const addCommentToSpecificArticle = (article_id, requestedComment) => {
   return db.query(
     `INSERT INTO comments (body, article_id, author, votes) VALUES ($1, $2, $3, $4) RETURNING *;`,
@@ -122,6 +135,7 @@ module.exports = {
   fetchSpecificArticle,
   fetchArticlesAndTotalComments,
   fetchAllCommentsOfSpecificArticle,
+  addArticle,
   addCommentToSpecificArticle,
   updateVotesOfSpecificArticle,
 };

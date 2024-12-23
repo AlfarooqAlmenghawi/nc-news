@@ -2,6 +2,7 @@ const {
   fetchSpecificArticle,
   fetchArticlesAndTotalComments,
   fetchAllCommentsOfSpecificArticle,
+  addArticle,
   addCommentToSpecificArticle,
   updateVotesOfSpecificArticle,
 } = require("../models/articles.model.js");
@@ -41,7 +42,12 @@ const getAllCommentsOfSpecificArticle = (request, response, next) => {
     });
 };
 
-const postArticle = (request, response, next) => {};
+const postArticle = (request, response, next) => {
+  const requestedArticle = request.body;
+  return addArticle(requestedArticle).then((result) => {
+    response.status(200).send({ addedArticle: result.rows });
+  });
+};
 
 const postCommentToSpecificArticle = (request, response, next) => {
   const { article_id } = request.params;
