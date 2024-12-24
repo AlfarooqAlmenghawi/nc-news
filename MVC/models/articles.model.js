@@ -25,12 +25,14 @@ const fetchArticlesAndTotalComments = (queries) => {
 
   let queryValues = []; // // queryValues array is useless by the way. it's just a fun reference
 
-  if (queries.topic) {
+  if (queries.topic && queries.author) {
+    queryString =
+      queryString +
+      ` WHERE topic = '${queries.topic}' AND articles.author = '${queries.author}'`;
+  } else if (queries.topic) {
     queryString = queryString + ` WHERE topic = '${queries.topic}'`;
     queryValues.push(queries.topic);
-  }
-
-  if (queries.author) {
+  } else if (queries.author) {
     queryString = queryString + ` WHERE articles.author = '${queries.author}'`;
     queryValues.push(queries.author);
   }
