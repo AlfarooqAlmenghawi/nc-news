@@ -23,11 +23,16 @@ const fetchArticlesAndTotalComments = (queries) => {
 
   let validOrderBys = ["asc", "desc"];
 
-  let queryValues = []; // queryValues array is useless by the way. it's just a fun reference
+  let queryValues = []; // // queryValues array is useless by the way. it's just a fun reference
 
   if (queries.topic) {
     queryString = queryString + ` WHERE topic = '${queries.topic}'`;
     queryValues.push(queries.topic);
+  }
+
+  if (queries.author) {
+    queryString = queryString + ` WHERE articles.author = '${queries.author}'`;
+    queryValues.push(queries.author);
   }
 
   queryString += ` GROUP BY articles.article_id`;
@@ -48,6 +53,7 @@ const fetchArticlesAndTotalComments = (queries) => {
     queryValues.push("desc");
   }
   console.log(queries);
+  console.log(queryString);
   return db.query(queryString).then((result) => {
     if (result.rows.length === 0) {
       return Promise.reject({ status: 410, message: "There are no articles." });
