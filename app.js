@@ -28,7 +28,10 @@ const {
   deleteSpecificComment,
 } = require("./MVC/controllers/comments.controller.js");
 
-const { getUsers } = require("./MVC/controllers/users.controller.js");
+const {
+  getUsers,
+  createUser,
+} = require("./MVC/controllers/users.controller.js");
 
 // Error Handling Requiring
 
@@ -55,6 +58,7 @@ app.get("/api/comments/:comment_id", getSpecificComment);
 
 app.post("/api/articles", postArticle);
 app.post("/api/topics", postTopic);
+app.post("/api/users", createUser);
 app.post("/api/articles/:article_id/comments", postCommentToSpecificArticle);
 
 app.patch("/api/articles/:article_id", patchVotesOfSpecificArticle);

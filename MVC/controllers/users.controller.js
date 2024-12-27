@@ -6,4 +6,9 @@ const getUsers = (request, response) => {
   });
 };
 
-module.exports = { getUsers };
+const createUser = (request, response) => {
+  const newUser = request.body;
+  console.log(newUser);
+};
+
+module.exports = { getUsers, createUser };
