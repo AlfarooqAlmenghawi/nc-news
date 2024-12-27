@@ -6,10 +6,15 @@ const fetchUsers = () => {
 };
 
 const addUser = (user) => {
-  return db.query(
-    `INSERT INTO users (username, name, avatar_url) VALUES ($1, $2, $3)`,
-    [user.username, user.name, user.avatar_url]
-  );
+  return db
+    .query(
+      `INSERT INTO users (username, name, avatar_url) VALUES ($1, $2, $3) RETURNING *`,
+      [user.username, user.name, user.avatar_url]
+    )
+    .then((result) => {
+      console.log(result);
+      return result.rows;
+    });
 };
 
-module.exports = { fetchUsers };
+module.exports = { fetchUsers, addUser };
