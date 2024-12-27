@@ -5,6 +5,7 @@ const {
   addArticle,
   addCommentToSpecificArticle,
   updateVotesOfSpecificArticle,
+  removeSpecificArticle,
 } = require("../models/articles.model.js");
 
 const getArticlesAndTotalComments = (request, response, next) => {
@@ -74,6 +75,13 @@ const patchVotesOfSpecificArticle = (request, response, next) => {
     });
 };
 
+const deleteSpecificArticle = (request, response, next) => {
+  const { article_id } = request.params;
+  return removeSpecificArticle(article_id).then(() => {
+    response.status(204).send();
+  });
+};
+
 module.exports = {
   getSpecificArticle,
   getArticlesAndTotalComments,
@@ -81,4 +89,5 @@ module.exports = {
   postArticle,
   postCommentToSpecificArticle,
   patchVotesOfSpecificArticle,
+  deleteSpecificArticle,
 };

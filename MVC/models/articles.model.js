@@ -139,6 +139,10 @@ const updateVotesOfSpecificArticle = (article_id, requestedVoteChangeData) => {
     });
 };
 
+const removeSpecificArticle = (article_id) => {
+  return db.query(`DELETE FROM articles WHERE article_id = $1;`, [article_id]);
+};
+
 module.exports = {
   fetchSpecificArticle,
   fetchArticlesAndTotalComments,
@@ -146,4 +150,5 @@ module.exports = {
   addArticle,
   addCommentToSpecificArticle,
   updateVotesOfSpecificArticle,
+  removeSpecificArticle,
 };

@@ -19,6 +19,7 @@ const {
   postArticle,
   postCommentToSpecificArticle,
   patchVotesOfSpecificArticle,
+  deleteSpecificArticle,
 } = require("./MVC/controllers/articles.controller.js");
 
 const {
@@ -58,6 +59,7 @@ app.post("/api/articles/:article_id/comments", postCommentToSpecificArticle);
 
 app.patch("/api/articles/:article_id", patchVotesOfSpecificArticle);
 
+app.delete("/api/articles/:article_id", deleteSpecificArticle);
 app.delete("/api/topics/:topic_name", deleteSpecificTopic);
 app.delete("/api/comments/:comment_id", deleteSpecificComment);
 
