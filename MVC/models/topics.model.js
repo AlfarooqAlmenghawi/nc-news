@@ -7,15 +7,11 @@ const fetchTopics = () => {
 
 const addTopic = (topicData) => {
   const { slug, description } = topicData;
-  console.log(slug);
-  console.log(description);
 
   const insertTopicQueryString = format(
     "INSERT INTO topics (slug, description) VALUES (%L) RETURNING *;",
     [slug, description]
   );
-  console.log(insertTopicQueryString);
-  return db.query(insertTopicQueryString);
 };
 
 const removeSpecificTopic = (topic_name) => {

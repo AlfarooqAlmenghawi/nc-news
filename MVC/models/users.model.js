@@ -12,7 +12,6 @@ const addUser = (user) => {
       [user.username, user.name, user.avatar_url]
     )
     .then((result) => {
-      console.log(result);
       return result.rows;
     });
 };

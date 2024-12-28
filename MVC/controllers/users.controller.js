@@ -8,7 +8,6 @@ const getUsers = (request, response) => {
 
 const createUser = (request, response, next) => {
   const newUser = request.body;
-  console.log(newUser);
   return addUser(newUser)
     .then((result) => {
       response.status(201).send({ newUser: result });
