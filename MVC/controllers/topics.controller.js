@@ -24,7 +24,6 @@ const postTopic = (request, response, next) => {
 
 const deleteSpecificTopic = (request, response, next) => {
   const { topic_name } = request.params;
-  console.log(topic_name);
   removeSpecificTopic(topic_name).then(() => {
     response.status(204).send();
   });
