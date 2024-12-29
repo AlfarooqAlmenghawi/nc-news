@@ -12,7 +12,6 @@ const getTopics = (request, response) => {
 
 const postTopic = (request, response, next) => {
   const { slug, description } = request.body;
-
   return addTopic(request.body)
     .then((result) => {
       response.status(200).send({ newTopic: result.rows });
